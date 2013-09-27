@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="OFBiz - UnitTesting Tools Component" default="create-ofbiz-structure" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
+
+    <target name="compile" depends="resolve">
+        <path id="classpath">
+            <fileset dir="lib" includes="*.jar" />
+            <fileset dir="extlib" includes="*.jar" />
+        </path>
+        <mkdir dir="bin" />
+        <javac srcdir="src" destdir="bin" classpathref="classpath" target="1.6"/>
+    </target>
+
+    <target name="create-ofbiz-structure" description="Creates an ofbiz application folder structure, to integrate the package in your ofbiz project." depends="run-junit-test">
+
+        <copy file="resource/build.xml" todir="dest/unittesttools" overwrite="true" />
+        <copy file="resource/ofbiz-component.xml" todir="dest/unittesttools" overwrite="true" />
+
+        <copy todir="dest/unittesttools/config">
+            <fileset dir="resource/config" />
+        </copy>
+        <copy todir="dest/unittesttools/testdef">
+            <fileset dir="resource/testdef" />
+        </copy>
+        <copy todir="dest/unittesttools/src">
+            <fileset dir="src" />
+        </copy>
+        <copy todir="dest/unittesttools/lib">
+            <fileset dir="lib" />
+        </copy>
+
+    </target>
+
+    <target name="clean-all" description="clean all">
+        <delete dir="dest" />
+        <delete dir="lib" />
+        <delete dir="bin" />
+    </target>
+
+    <target name="clean-destination" description="deletes destination folder">
+        <delete dir="dest" />
+    </target>
+
+    <target name="clean-dependencies" description="deletes lib folder">
+        <delete dir="lib" />
+    </target>
+
+    <target name="run-junit-test" description="run junit tests" depends="compile">
+        <junit showoutput="yes" fork="true" haltonfailure="true">
+            <classpath>
+                <!-- The location of the JUnit version that you want to use -->
+                <pathelement location="bin" />
+                <fileset dir="extlib">
+                    <include name="**/*.jar" />
+                </fileset>
+                <fileset dir="lib">
+                    <include name="**/*.jar" />
+                </fileset>
+            </classpath>
+
+            <formatter type="plain" usefile="false" />
+
+            <batchtest>
+                <fileset dir="bin" includes="**/*Test.class">
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
+
+    <target name="resolve" description="--> retrieve dependencies with ivy">
+        <ivy:retrieve />
+    </target>
+
+</project>
