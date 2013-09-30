@@ -3,4 +3,7 @@
 # Package Files #
 *.war
 *.ear
+
+# Folder #
 /bin
+/lib
