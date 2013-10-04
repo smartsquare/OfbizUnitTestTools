@@ -2,6 +2,11 @@
 
 <project name="OFBiz - UnitTesting Tools Component" default="create-ofbiz-structure" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
 
+    <target name="jar" depends="compile">
+        <mkdir dir="dest"/>
+        <jar destfile="dest/ofbiz-unit-tools.jar" basedir="bin" />
+    </target>
+
     <target name="compile" depends="resolve">
         <path id="classpath">
             <fileset dir="lib" includes="*.jar" />
