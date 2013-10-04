@@ -41,6 +41,16 @@ public class TestGenericValueTest {
     }
 
     @Test
+    public void put_and_get_field_and_value_to_generic_value() throws Exception {
+        TestGenericValue fakeObject = new TestGenericValue("EntityName");
+        fakeObject.put("field1", "value");
+
+        assertTrue(fakeObject.hasField("field1"));
+
+        assertEquals("value", fakeObject.getValueForField("field1"));
+    }
+
+    @Test
     public void get_string_value_from_object() throws Exception {
         TestGenericValue fakeObject = new TestGenericValue("EntityName");
         fakeObject.addFieldAndValue("field1", "value");

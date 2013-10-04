@@ -41,6 +41,11 @@ public class TestGenericValue extends GenericValue {
         this.fieldMap.put(name, value);
     }
 
+    @Override
+    public Object put(String name, Object value) {
+        return this.fieldMap.put(name, value);
+    }
+
     /**
      * Set a boolean flag which indicates that the cache is used for the last request which returns this {@link GenericValue}
      * @param useCache
