@@ -3,6 +3,7 @@ package org.ofbiz.unit.entity;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.ofbiz.entity.GenericEntity;
 import org.ofbiz.entity.GenericValue;
 
 /**
@@ -133,6 +134,25 @@ public class TestGenericValue extends GenericValue {
         } else if (!fieldMap.equals(other.fieldMap))
             return false;
         return true;
+    }
+
+
+    @Override
+    public int compareTo(GenericEntity that) {
+        if (that == null)
+            return -1;
+
+        int tempResult = this.entityName.compareTo(that.getEntityName());
+
+        // if they did not match, we know the order, otherwise compare the primary keys
+        if (tempResult != 0)
+            return tempResult;
+
+        if (fieldMap.entrySet().equals(that.entrySet())) {
+            return 0;
+        }
+
+        return -1;
     }
 
 }
