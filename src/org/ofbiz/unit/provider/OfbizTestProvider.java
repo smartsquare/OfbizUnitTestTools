@@ -157,7 +157,12 @@ public class OfbizTestProvider {
      */
     public void initUtilPropertiesGetMessage() {
         PowerMockito.mockStatic(UtilProperties.class);
-        when(UtilProperties.getMessage(anyString(), anyString(), (Locale) anyObject())).thenAnswer(new Answer<String>() {
+        when(UtilProperties.getMessage(anyString(), anyString(), (Locale) anyObject())).thenAnswer(requestedMessage());
+        when(UtilProperties.getMessage(anyString(), anyString(), anyMap(), (Locale) anyObject())).thenAnswer(requestedMessage());
+    }
+
+    private Answer<String> requestedMessage() {
+        return new Answer<String>() {
 
             @Override
             public String answer(InvocationOnMock invocation) throws Throwable {
@@ -166,6 +171,6 @@ public class OfbizTestProvider {
 
                 return requestedUiLabels + ":" + requestedLabel;
             }
-        });
+        };
     }
 }

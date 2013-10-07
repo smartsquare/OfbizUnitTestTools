@@ -1,5 +1,6 @@
 package org.ofbiz.unit.test;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -124,6 +125,9 @@ public class OfbizTestProviderTest {
 
         String message = UtilProperties.getMessage("TestUiLabels", "Label", new Locale("DE"));
         assertEquals("TestUiLabels:Label", message);
+
+        message = UtilProperties.getMessage("TestUiLabels", "Label2", new HashMap<String, Object>(), new Locale("DE"));
+        assertEquals("TestUiLabels:Label2", message);
     }
 
 }
