@@ -130,4 +130,17 @@ public class OfbizTestProviderTest {
         assertEquals("TestUiLabels:Label2", message);
     }
 
+    @Test
+    public void init_delegator_find_list_mock() throws Exception {
+        List<TestGenericValue> returnValues = UtilMisc.toList(fakeGenericValue, fakeGenericValue, fakeGenericValue);
+        provider.initDelegatorFindList(returnValues);
+
+        List<GenericValue> results = delegator.findList("EntityName", null, null, null, null, false);
+
+        assertTrue(UtilValidate.isNotEmpty(results));
+        assertTrue(results.get(0) instanceof TestGenericValue);
+        List<TestGenericValue> resultValues = UtilGenerics.checkList(results, TestGenericValue.class);
+        assertEquals(returnValues, resultValues);
+    }
+
 }
