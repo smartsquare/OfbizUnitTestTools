@@ -59,9 +59,6 @@ public class TestGenericValue extends GenericValue {
     @Override
     public String getString(String fieldName) {
         Object fieldValue = getValueForField(fieldName);
-        if (!(fieldValue instanceof String)) {
-            throw new IllegalStateException("The requested value is not a String -> " + fieldValue.getClass().getName());
-        }
         return (String) fieldValue;
     }
 

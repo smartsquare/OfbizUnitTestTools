@@ -57,13 +57,6 @@ public class TestGenericValueTest {
         assertEquals("value", fakeObject.getString("field1"));
     }
 
-    @Test(expected = IllegalStateException.class)
-    public void get_string_throws_expection_when_not_a_string() {
-        TestGenericValue fakeObject = new TestGenericValue("EntityName");
-        fakeObject.addFieldAndValue("field1", 42);
-        fakeObject.getString("field1");
-    }
-
     @Test
     public void set_and_get_arguments_for_request() throws Exception {
         TestGenericValue fakeObject = new TestGenericValue("EntityName");
