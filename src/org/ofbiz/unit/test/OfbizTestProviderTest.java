@@ -1,6 +1,7 @@
 package org.ofbiz.unit.test;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.junit.Before;
@@ -9,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.ofbiz.base.util.UtilGenerics;
 import org.ofbiz.base.util.UtilMisc;
+import org.ofbiz.base.util.UtilProperties;
 import org.ofbiz.base.util.UtilValidate;
 import org.ofbiz.base.util.cache.UtilCache;
 import org.ofbiz.entity.Delegator;
@@ -36,7 +38,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({ UtilCache.class })
+@PrepareForTest({ UtilCache.class, UtilProperties.class })
 public class OfbizTestProviderTest {
 
     private OfbizTestProvider provider;
@@ -114,6 +116,14 @@ public class OfbizTestProviderTest {
         assertTrue(result instanceof TestGenericValue);
         assertEquals(fakeGenericValue, result);
 
+    }
+
+    @Test
+    public void init_util_properties_get_message_and_return_uilabel_indicator() throws Exception {
+        provider.initUtilPropertiesGetMessage();
+
+        String message = UtilProperties.getMessage("TestUiLabels", "Label", new Locale("DE"));
+        assertEquals("TestUiLabels:Label", message);
     }
 
 }

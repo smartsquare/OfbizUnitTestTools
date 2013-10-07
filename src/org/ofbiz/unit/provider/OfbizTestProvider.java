@@ -3,11 +3,13 @@ package org.ofbiz.unit.provider;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.ofbiz.base.util.UtilGenerics;
+import org.ofbiz.base.util.UtilProperties;
 import org.ofbiz.entity.Delegator;
 import org.ofbiz.entity.GenericEntityException;
 import org.ofbiz.entity.GenericValue;
@@ -15,10 +17,12 @@ import org.ofbiz.service.DispatchContext;
 import org.ofbiz.service.GenericServiceException;
 import org.ofbiz.service.LocalDispatcher;
 import org.ofbiz.unit.entity.TestGenericValue;
+import org.powermock.api.mockito.PowerMockito;
 
 import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyList;
 import static org.mockito.Matchers.anyMap;
+import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyString;
 
 import static org.mockito.Mockito.when;
@@ -144,5 +148,24 @@ public class OfbizTestProvider {
 
         });
 
+    }
+
+    /**
+     * Fakes the static {@link UtilProperties}.getMessage method for any uiLabel.
+     * When the method is called within your code a String will returned that shows
+     * which Label was loaded: {code}UiLabelName:LabelName{code}
+     */
+    public void initUtilPropertiesGetMessage() {
+        PowerMockito.mockStatic(UtilProperties.class);
+        when(UtilProperties.getMessage(anyString(), anyString(), (Locale) anyObject())).thenAnswer(new Answer<String>() {
+
+            @Override
+            public String answer(InvocationOnMock invocation) throws Throwable {
+                String requestedUiLabels = (String) invocation.getArguments()[0];
+                String requestedLabel = (String) invocation.getArguments()[1];
+
+                return requestedUiLabels + ":" + requestedLabel;
+            }
+        });
     }
 }
