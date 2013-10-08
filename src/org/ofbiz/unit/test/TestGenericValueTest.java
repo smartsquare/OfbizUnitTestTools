@@ -8,6 +8,8 @@ import org.ofbiz.entity.GenericValue;
 import org.ofbiz.unit.entity.TestGenericValue;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class TestGenericValueTest {
@@ -64,6 +66,54 @@ public class TestGenericValueTest {
         fakeObject.setArguments(argumentMap);
 
         assertEquals(argumentMap, fakeObject.getArguments());
+    }
+
+    @Test
+    public void set_and_get_boolean_parameter_test_true_result() throws Exception {
+        TestGenericValue fakeObject = new TestGenericValue("EntityName");
+        fakeObject.set("isActive", "Y");
+        assertTrue(fakeObject.getBoolean("isActive"));
+
+        fakeObject.set("isActive", "T");
+        assertTrue(fakeObject.getBoolean("isActive"));
+
+        fakeObject.set("isActive", true);
+        assertTrue(fakeObject.getBoolean("isActive"));
+
+    }
+
+    @Test
+    public void set_and_get_boolean_parameter_test_false_result() throws Exception {
+        TestGenericValue fakeObject = new TestGenericValue("EntityName");
+        fakeObject.set("isActive", "N");
+        assertFalse(fakeObject.getBoolean("isActive"));
+
+        fakeObject.set("isActive", "F");
+        assertFalse(fakeObject.getBoolean("isActive"));
+
+        fakeObject.set("isActive", false);
+        assertFalse(fakeObject.getBoolean("isActive"));
+    }
+
+    @Test
+    public void set_and_get_boolean_parameter_test_null_result() throws Exception {
+        TestGenericValue fakeObject = new TestGenericValue("EntityName");
+        fakeObject.set("isActive", null);
+        assertNull(fakeObject.getBoolean("isActive"));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void set_and_get_boolean_parameter_test_exception_when_object_not_parsable() throws Exception {
+        TestGenericValue fakeObject = new TestGenericValue("EntityName");
+        fakeObject.set("isActive", new Object());
+        fakeObject.getBoolean("isActive");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void set_and_get_boolean_parameter_test_exception_when_string_not_parsable() throws Exception {
+        TestGenericValue fakeObject = new TestGenericValue("EntityName");
+        fakeObject.set("isActive", "FOO");
+        fakeObject.getBoolean("isActive");
     }
 
 }

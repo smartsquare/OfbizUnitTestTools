@@ -155,4 +155,29 @@ public class TestGenericValue extends GenericValue {
         return -1;
     }
 
+    @Override
+    public Boolean getBoolean(String name) {
+        Object obj = fieldMap.get(name);
+
+        if (obj == null) {
+            return null;
+        }
+        if (obj instanceof Boolean) {
+            return (Boolean) obj;
+        } else if (obj instanceof String) {
+            String value = (String) obj;
+
+            if ("Y".equalsIgnoreCase(value) || "T".equalsIgnoreCase(value)) {
+                return Boolean.TRUE;
+            } else if ("N".equalsIgnoreCase(value) || "F".equalsIgnoreCase(value)) {
+                return Boolean.FALSE;
+            } else {
+                throw new IllegalArgumentException("getBoolean could not map the String '" + value + "' to Boolean type");
+            }
+        } else {
+            throw new IllegalArgumentException("getBoolean could not map the object '" + obj.toString() + "' to Boolean type, unknown object type: "
+                                               + obj.getClass().getName());
+        }
+    }
+
 }
