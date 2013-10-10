@@ -56,7 +56,7 @@ public class OfbizTestProvider {
      * @param fakeGenericValue
      * @throws GenericEntityException
      */
-    public void initDelegatorFindOne(final TestGenericValue fakeGenericValue) throws GenericEntityException {
+    public void whenDelegatorFindOneThenReturn(final TestGenericValue fakeGenericValue) throws GenericEntityException {
         when(delegator.findOne(anyString(), anyBoolean(), anyMap())).then(new Answer<GenericValue>() {
 
             @Override
@@ -119,7 +119,7 @@ public class OfbizTestProvider {
      * @param returnValues
      * @throws GenericEntityException
      */
-    public void initDelegatorFindByAnd(final List<TestGenericValue> returnValues) throws GenericEntityException {
+    public void whenDelegatorFindByAndThenReturn(final List<TestGenericValue> returnValues) throws GenericEntityException {
         when(delegator.findByAnd(anyString(), anyMap(), anyList(), anyBoolean())).then(new Answer<List<TestGenericValue>>() {
 
             @Override
@@ -145,7 +145,7 @@ public class OfbizTestProvider {
      * @param returnValues
      * @throws GenericEntityException
      */
-    public void initDelegatorFindList(final List<TestGenericValue> returnValues) throws GenericEntityException {
+    public void whenDelegatorFindListThenReturn(final List<TestGenericValue> returnValues) throws GenericEntityException {
         when(delegator.findList(anyString(), any(EntityCondition.class), anySet(), anyList(), any(EntityFindOptions.class), anyBoolean())).then(
                 new Answer<List<TestGenericValue>>() {
 
@@ -163,7 +163,13 @@ public class OfbizTestProvider {
 
     }
 
-    public void initDelegatorMakeValue(final TestGenericValue fakeGenericValue) {
+    /**
+     * Fakes the {@link Delegator} makeValue method and returns the passed {@link TestGenericValue} objects.
+     *
+     * @param returnValue
+     * @throws GenericEntityException
+     */
+    public void whenDelegatorMakeValueThenReturn(final TestGenericValue fakeGenericValue) {
         when(delegator.makeValue(anyString())).then(new Answer<GenericValue>() {
 
             @Override

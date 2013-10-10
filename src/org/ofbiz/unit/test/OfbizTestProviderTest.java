@@ -85,7 +85,7 @@ public class OfbizTestProviderTest {
 
     @Test
     public void init_delegator_find_one_mock() throws Exception {
-        provider.initDelegatorFindOne(fakeGenericValue);
+        provider.whenDelegatorFindOneThenReturn(fakeGenericValue);
 
         GenericValue result = delegator.findOne("EntityName", false, UtilMisc.toMap("", ""));
 
@@ -97,7 +97,7 @@ public class OfbizTestProviderTest {
     @Test
     public void init_delegator_find_by_and_mock() throws Exception {
         List<TestGenericValue> returnValues = UtilMisc.toList(fakeGenericValue, fakeGenericValue, fakeGenericValue);
-        provider.initDelegatorFindByAnd(returnValues);
+        provider.whenDelegatorFindByAndThenReturn(returnValues);
 
         List<GenericValue> results = delegator.findByAnd("EntityName", UtilMisc.toMap("", ""), null, false);
 
@@ -109,7 +109,7 @@ public class OfbizTestProviderTest {
 
     @Test
     public void init_delegator_make_value_mock() throws Exception {
-        provider.initDelegatorMakeValue(fakeGenericValue);
+        provider.whenDelegatorMakeValueThenReturn(fakeGenericValue);
 
         GenericValue result = delegator.makeValue("EntityName");
 
@@ -133,7 +133,7 @@ public class OfbizTestProviderTest {
     @Test
     public void init_delegator_find_list_mock() throws Exception {
         List<TestGenericValue> returnValues = UtilMisc.toList(fakeGenericValue, fakeGenericValue, fakeGenericValue);
-        provider.initDelegatorFindList(returnValues);
+        provider.whenDelegatorFindListThenReturn(returnValues);
 
         List<GenericValue> results = delegator.findList("EntityName", null, null, null, null, false);
 
