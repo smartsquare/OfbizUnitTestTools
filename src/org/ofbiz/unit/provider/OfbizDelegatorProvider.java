@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import org.ofbiz.base.util.UtilGenerics;
 import org.ofbiz.base.util.UtilProperties;
 import org.ofbiz.entity.Delegator;
 import org.ofbiz.entity.GenericEntityException;
@@ -53,7 +54,7 @@ public class OfbizDelegatorProvider {
             @Override
             public GenericValue answer(InvocationOnMock invocation) throws Throwable {
                 Boolean useCache = (Boolean) invocation.getArguments()[1];
-                Map<String, Object> arguments = (Map<String, Object>) invocation.getArguments()[2];
+                Map<String, Object> arguments = UtilGenerics.checkMap(invocation.getArguments()[2]);
 
                 fakeGenericValue.useCache(useCache).setArguments(arguments);
 
@@ -74,7 +75,7 @@ public class OfbizDelegatorProvider {
             @Override
             public List<TestGenericValue> answer(InvocationOnMock invocation) throws Throwable {
                 Boolean useCache = (Boolean) invocation.getArguments()[3];
-                Map<String, Object> arguments = (Map<String, Object>) invocation.getArguments()[1];
+                Map<String, Object> arguments = UtilGenerics.checkMap(invocation.getArguments()[1]);
                 // TODO add the input sort list to the output
 
                 // TODO use an object as return value not a list to store the parameters along the object
@@ -123,8 +124,7 @@ public class OfbizDelegatorProvider {
 
             @Override
             public GenericValue answer(InvocationOnMock invocation) throws Throwable {
-                String entityName = (String) invocation.getArguments()[0];
-
+                // String entityName = (String) invocation.getArguments()[0];
                 return fakeGenericValue;
             }
 
