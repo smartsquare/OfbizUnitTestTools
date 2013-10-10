@@ -116,4 +116,17 @@ public class TestGenericValueTest {
         fakeObject.getBoolean("isActive");
     }
 
+    @Test
+    public void test_is_empty_when_no_fields_set() throws Exception {
+        TestGenericValue emptyFakeObject = new TestGenericValue("EntityName");
+        assertTrue(emptyFakeObject.isEmpty());
+    }
+
+    @Test
+    public void test_is_not_empty_when_fields_set() throws Exception {
+        TestGenericValue notEmptyFakeObject = new TestGenericValue("EntityName");
+        notEmptyFakeObject.set("field1", "value");
+        assertFalse(notEmptyFakeObject.isEmpty());
+    }
+
 }

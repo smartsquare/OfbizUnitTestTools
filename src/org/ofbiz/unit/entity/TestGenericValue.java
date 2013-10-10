@@ -180,4 +180,9 @@ public class TestGenericValue extends GenericValue {
         }
     }
 
+    @Override
+    public boolean isEmpty() {
+        return fieldMap.isEmpty();
+    }
+
 }
