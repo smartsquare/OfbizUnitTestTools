@@ -135,7 +135,7 @@ public class OfbizDelegatorProvider {
     /**
      * Fakes the static {@link UtilProperties}.getMessage method for any uiLabel.
      * When the method is called within your code a String will returned that shows
-     * which Label was loaded: {code}UiLabelName:LabelName{code}
+     * which Label was loaded: {code}UiLabelResourceName:LabelName{code}
      */
     public void initUtilPropertiesGetMessage() {
         PowerMockito.mockStatic(UtilProperties.class);
