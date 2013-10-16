@@ -129,4 +129,13 @@ public class TestGenericValueTest {
         assertFalse(notEmptyFakeObject.isEmpty());
     }
 
+    @Test
+    public void test_contain_method() throws Exception {
+        TestGenericValue fakeObject = new TestGenericValue("EntityName");
+        fakeObject.set("field1", "value");
+
+        assertTrue(fakeObject.containsKey("field1"));
+        assertFalse(fakeObject.containsKey("field2"));
+    }
+
 }

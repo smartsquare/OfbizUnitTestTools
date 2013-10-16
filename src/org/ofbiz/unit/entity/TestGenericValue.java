@@ -185,4 +185,9 @@ public class TestGenericValue extends GenericValue {
         return fieldMap.isEmpty();
     }
 
+    @Override
+    public boolean containsKey(Object key) {
+        return fieldMap.containsKey(key);
+    }
+
 }
