@@ -68,10 +68,6 @@ public class TestGenericValue extends GenericValue {
         return this.entityName;
     }
 
-    public boolean hasField(String fieldName) {
-        return fieldMap.containsKey(fieldName);
-    }
-
     public Object getValueForField(String fieldName) {
         return fieldMap.get(fieldName);
     }
