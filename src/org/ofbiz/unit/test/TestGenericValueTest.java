@@ -44,18 +44,11 @@ public class TestGenericValueTest {
 
     @Test
     public void put_and_get_field_and_value_to_generic_value() throws Exception {
-        TestGenericValue fakeObject = new TestGenericValue("EntityName");
+        GenericValue fakeObject = new TestGenericValue("EntityName");
         fakeObject.put("field1", "value");
 
         assertTrue(fakeObject.containsKey("field1"));
 
-        assertEquals("value", fakeObject.getString("field1"));
-    }
-
-    @Test
-    public void get_string_value_from_object() throws Exception {
-        TestGenericValue fakeObject = new TestGenericValue("EntityName");
-        fakeObject.addFieldAndValue("field1", "value");
         assertEquals("value", fakeObject.getString("field1"));
     }
 
@@ -70,7 +63,7 @@ public class TestGenericValueTest {
 
     @Test
     public void set_and_get_boolean_parameter_test_true_result() throws Exception {
-        TestGenericValue fakeObject = new TestGenericValue("EntityName");
+        GenericValue fakeObject = new TestGenericValue("EntityName");
         fakeObject.set("isActive", "Y");
         assertTrue(fakeObject.getBoolean("isActive"));
 
@@ -84,7 +77,7 @@ public class TestGenericValueTest {
 
     @Test
     public void set_and_get_boolean_parameter_test_false_result() throws Exception {
-        TestGenericValue fakeObject = new TestGenericValue("EntityName");
+        GenericValue fakeObject = new TestGenericValue("EntityName");
         fakeObject.set("isActive", "N");
         assertFalse(fakeObject.getBoolean("isActive"));
 
@@ -97,41 +90,41 @@ public class TestGenericValueTest {
 
     @Test
     public void set_and_get_boolean_parameter_test_null_result() throws Exception {
-        TestGenericValue fakeObject = new TestGenericValue("EntityName");
+        GenericValue fakeObject = new TestGenericValue("EntityName");
         fakeObject.set("isActive", null);
         assertNull(fakeObject.getBoolean("isActive"));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void set_and_get_boolean_parameter_test_exception_when_object_not_parsable() throws Exception {
-        TestGenericValue fakeObject = new TestGenericValue("EntityName");
+        GenericValue fakeObject = new TestGenericValue("EntityName");
         fakeObject.set("isActive", new Object());
         fakeObject.getBoolean("isActive");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void set_and_get_boolean_parameter_test_exception_when_string_not_parsable() throws Exception {
-        TestGenericValue fakeObject = new TestGenericValue("EntityName");
+        GenericValue fakeObject = new TestGenericValue("EntityName");
         fakeObject.set("isActive", "FOO");
         fakeObject.getBoolean("isActive");
     }
 
     @Test
     public void test_is_empty_when_no_fields_set() throws Exception {
-        TestGenericValue emptyFakeObject = new TestGenericValue("EntityName");
+        GenericValue emptyFakeObject = new TestGenericValue("EntityName");
         assertTrue(emptyFakeObject.isEmpty());
     }
 
     @Test
     public void test_is_not_empty_when_fields_set() throws Exception {
-        TestGenericValue notEmptyFakeObject = new TestGenericValue("EntityName");
+        GenericValue notEmptyFakeObject = new TestGenericValue("EntityName");
         notEmptyFakeObject.set("field1", "value");
         assertFalse(notEmptyFakeObject.isEmpty());
     }
 
     @Test
     public void test_contain_method() throws Exception {
-        TestGenericValue fakeObject = new TestGenericValue("EntityName");
+        GenericValue fakeObject = new TestGenericValue("EntityName");
         fakeObject.set("field1", "value");
 
         assertTrue(fakeObject.containsKey("field1"));
