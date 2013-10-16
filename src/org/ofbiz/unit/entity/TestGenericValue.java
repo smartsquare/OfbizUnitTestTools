@@ -59,17 +59,13 @@ public class TestGenericValue extends GenericValue {
 
     @Override
     public String getString(String fieldName) {
-        Object fieldValue = getValueForField(fieldName);
+        Object fieldValue = this.fieldMap.get(fieldName);
         return (String) fieldValue;
     }
 
     @Override
     public String getEntityName() {
         return this.entityName;
-    }
-
-    public Object getValueForField(String fieldName) {
-        return fieldMap.get(fieldName);
     }
 
     /**

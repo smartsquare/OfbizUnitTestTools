@@ -28,18 +28,18 @@ public class TestGenericValueTest {
         assertTrue(fakeObject.containsKey("field1"));
         assertTrue(fakeObject.containsKey("field2"));
 
-        assertEquals("value", fakeObject.getValueForField("field1"));
-        assertEquals("", fakeObject.getValueForField("field2"));
+        assertEquals("value", fakeObject.getString("field1"));
+        assertEquals("", fakeObject.getString("field2"));
     }
 
     @Test
     public void set_and_get_field_and_value_to_generic_value() throws Exception {
-        TestGenericValue fakeObject = new TestGenericValue("EntityName");
+        GenericValue fakeObject = new TestGenericValue("EntityName");
         fakeObject.set("field1", "value");
 
         assertTrue(fakeObject.containsKey("field1"));
 
-        assertEquals("value", fakeObject.getValueForField("field1"));
+        assertEquals("value", fakeObject.getString("field1"));
     }
 
     @Test
@@ -49,7 +49,7 @@ public class TestGenericValueTest {
 
         assertTrue(fakeObject.containsKey("field1"));
 
-        assertEquals("value", fakeObject.getValueForField("field1"));
+        assertEquals("value", fakeObject.getString("field1"));
     }
 
     @Test
