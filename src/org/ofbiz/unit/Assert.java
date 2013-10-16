@@ -1,6 +1,11 @@
 package org.ofbiz.unit;
 
+import java.util.Map;
+
+import org.ofbiz.service.ServiceUtil;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class Assert {
 
@@ -13,5 +18,13 @@ public class Assert {
 
     static public void assertEventSuccess(String condition) {
         assertEquals(RESPOND_SUCCESS, condition);
+    }
+
+    static public void assertServiceError(Map<String, Object> condition) {
+        assertTrue(ServiceUtil.isError(condition));
+    }
+
+    static public void assertServiceSuccess(Map<String, Object> condition) {
+        assertTrue(ServiceUtil.isSuccess(condition));
     }
 }
